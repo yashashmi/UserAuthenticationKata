@@ -61,7 +61,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnTrueWhenPasswordOnlyNumbers()
         {
             var userValidator = new UserValidator();
-            var result = userValidator.ValidatePassword("123456");
+            var result = userValidator.IsValidPassword("123456");
 
             Assert.That(result, Is.True);
         }
@@ -70,39 +70,11 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnFalseWhenPasswordOtherThanOnlyNumbers()
         {
             var userValidator = new UserValidator();
-            var result = userValidator.ValidatePassword("Abc123");
+            var result = userValidator.IsValidPassword("Abc123");
 
             Assert.That(result, Is.False);
         }
 
-        [Test]
-        public void ShouldReturnSuccessMessageOnUserAccountCreation()
-        {
-            var userValidator = new UserValidator();
-            var result = userValidator.CreateUser("ValidUser", "1234");
-
-            Assert.That(result, Is.EqualTo("Account Created Successfuly"));
-
-        }
-
-        [Test]
-        public void ShouldReturnFailureMessageWhenInvalidUserName()
-        {
-            var userValidator = new UserValidator();
-            var result = userValidator.CreateUser("InvalidUser123", "1234");
-
-            Assert.That(result, Is.EqualTo("Account Creation Failed"));
-
-        }
-
-        [Test]
-        public void ShouldReturnFailureMessageWhenInvalidPassword()
-        {
-            var userValidator = new UserValidator();
-            var result = userValidator.CreateUser("ValidUser", "Abc123");
-
-            Assert.That(result, Is.EqualTo("Account Creation Failed"));
-
-        }
+        
     }
 }

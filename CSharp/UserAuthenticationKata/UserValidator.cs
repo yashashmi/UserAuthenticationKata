@@ -6,14 +6,7 @@ namespace UserAuthenticationKata.Tests
     public  class UserValidator
     {
 
-        public string CreateUser(string userName, string password)
-        {
-            if (!IsValidUserName(userName) || !ValidatePassword(password))
-            {
-                return "Account Creation Failed";
-            }
-            return "Account Created Successfuly";
-        }
+      
 
         public bool IsValidUserName(string userName)
         {
@@ -30,7 +23,7 @@ namespace UserAuthenticationKata.Tests
 
         }
 
-        public bool ValidatePassword(string password)
+        public bool IsValidPassword(string password)
         {
             return password.All(p => char.IsDigit(p));
         }
