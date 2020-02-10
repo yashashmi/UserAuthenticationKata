@@ -3,10 +3,10 @@ using System.Text.RegularExpressions;
 
 namespace UserAuthenticationKata.Tests
 {
-    public  class UserValidator
+    public class UserValidator
     {
 
-      
+
 
         public bool IsValidUserName(string userName)
         {
@@ -25,7 +25,28 @@ namespace UserAuthenticationKata.Tests
 
         public bool IsValidPassword(string password)
         {
-            return password.All(p => char.IsDigit(p));
+            var digitCount = 0;
+            var letterCount = 0;
+            foreach (var ch in password)
+            {
+                if (char.IsDigit(ch))
+                {
+                    digitCount++;
+                }
+
+                if (char.IsLetter(ch))
+                {
+                    letterCount++;
+                }
+            }
+
+            if (password.Length < 8 || digitCount < 2 || letterCount < 2)
+            {
+                return false;
+            }
+            return true;
+
+            //return password.All(p => char.IsDigit(p));
         }
     }
 }

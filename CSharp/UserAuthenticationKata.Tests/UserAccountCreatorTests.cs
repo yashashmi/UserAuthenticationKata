@@ -8,7 +8,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnSuccessMessageOnUserAccountCreation()
         {
             var accountCreator = new UserAccountCreator();
-            var result = accountCreator.CreateUser("ValidUser", "1234");
+            var result = accountCreator.CreateUser("ValidUser", "Abc123456");
 
             Assert.That(result, Is.EqualTo("Account Created Successfuly"));
 
@@ -18,7 +18,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnFailureMessageWhenInvalidUserName()
         {
             var accountCreator = new UserAccountCreator();
-            var result = accountCreator.CreateUser("InvalidUser123", "1234");
+            var result = accountCreator.CreateUser("InvalidUser123", "Abc123456");
 
             Assert.That(result, Is.EqualTo("Account Creation Failed"));
 
@@ -45,7 +45,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldIncreaseTheUserCountInListOnUserCreation()
         {
             var userCreator = new UserAccountCreator();
-            userCreator.CreateUser("ValidUser", "1234");
+            userCreator.CreateUser("ValidUser", "Abc123456");
 
             Assert.AreEqual(1, userCreator.Users.Count);
         }

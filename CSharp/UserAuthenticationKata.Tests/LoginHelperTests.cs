@@ -10,7 +10,7 @@ namespace UserAuthenticationKata.Tests
         [SetUp]
         public void OneTimeSetup()
         {
-            validPassword_ = "123456";
+            validPassword_ = "Abc123456";
             validUser_ = "David";
         }
         [Test]
