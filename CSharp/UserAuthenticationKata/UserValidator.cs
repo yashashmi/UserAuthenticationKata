@@ -6,33 +6,33 @@ namespace UserAuthenticationKata.Tests
     public  class UserValidator
     {
 
-        // internal string CreateUser(string userName, string password)
-        // {
-        //     if (!Validate(userName) || !ValidateAlphabets(userName) || !ValidatePassword(password))
-        //     {
-        //         return "Account Creation Failed";
-        //     }
-        //     return "Account Created Successfuly";
-        // }
-
-        public bool Validate(string userName)
+        public string CreateUser(string userName, string password)
         {
-            if (userName.Length < 1 || userName.Length > 11)
+            if (!IsValidUserName(userName) || !ValidatePassword(password))
+            {
+                return "Account Creation Failed";
+            }
+            return "Account Created Successfuly";
+        }
+
+        public bool IsValidUserName(string userName)
+        {
+            if (userName.Length < 1 || userName.Length > 11 || !DoesContainOnlyAlphabets(userName))
             {
                 return false;
             }
             return true;
         }
 
-        public bool ValidateAlphabets(string userName)
+        private bool DoesContainOnlyAlphabets(string userName)
         {
             return Regex.IsMatch(userName, @"^[a-zA-Z]+$");
 
         }
 
-        public bool ValidatePassword(string v)
+        public bool ValidatePassword(string password)
         {
-            return v.All(p => char.IsDigit(p));
+            return password.All(p => char.IsDigit(p));
         }
     }
 }

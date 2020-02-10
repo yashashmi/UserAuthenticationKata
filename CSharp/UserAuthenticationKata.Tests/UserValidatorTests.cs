@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using NUnit.Framework;
 
 namespace UserAuthenticationKata.Tests
 {
-    public class Tests
+    public class UserValidatorTests
     {
         [SetUp]
         public void Setup()
@@ -15,7 +15,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnTrueWhenAValidLengthUserNameProvided()
         {
             var userValidator = new UserValidator();
-            var result = userValidator.Validate("ValidUser");
+            var result = userValidator.IsValidUserName("ValidUser");
             Assert.That(result, Is.True);
         }
 
@@ -23,7 +23,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnFalseWhenUserNameLengthLessThanOne()
         {
             var userValidator = new UserValidator();
-            var result = userValidator.Validate("");
+            var result = userValidator.IsValidUserName("");
 
             Assert.That(result, Is.False);
 
@@ -33,7 +33,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnFalseWhenUserNameLengthGreaterThanEleven()
         {
             var userValidator = new UserValidator();
-            var result = userValidator.Validate("SomeLongUserName");
+            var result = userValidator.IsValidUserName("SomeLongUserName");
 
             Assert.That(result, Is.False);
 
@@ -43,7 +43,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnTrueWhenUserNameOnlyAlphabets()
         {
             var userValidator = new UserValidator();
-            var result = userValidator.ValidateAlphabets("ValidUser");
+            var result = userValidator.IsValidUserName("ValidUser");
 
             Assert.That(result, Is.True);
         }
@@ -52,7 +52,7 @@ namespace UserAuthenticationKata.Tests
         public void ShouldReturnFalseWhenUserNameOtherThanOnlyAlphabets()
         {
             var userValidator = new UserValidator();
-            var result = userValidator.ValidateAlphabets("Abc123");
+            var result = userValidator.IsValidUserName("Abc123");
 
             Assert.That(result, Is.False);
         }
@@ -75,25 +75,34 @@ namespace UserAuthenticationKata.Tests
             Assert.That(result, Is.False);
         }
 
-        // [Test]
-        // public void ShouldReturnSuccessMessageOnUserAccountCreation()
-        // {
-        //     var a = new A();
-        //     var result = a.CreateUser("ValidUser", "1234");
+        [Test]
+        public void ShouldReturnSuccessMessageOnUserAccountCreation()
+        {
+            var userValidator = new UserValidator();
+            var result = userValidator.CreateUser("ValidUser", "1234");
 
-        //     Assert.That(result, Is.EqualTo("Account Created Successfuly"));
+            Assert.That(result, Is.EqualTo("Account Created Successfuly"));
 
-        // }
+        }
 
-        // [Test]
-        // public void ShouldReturnFailureMessageWhenUserCreationFailed()
-        // {
-        //     var a = new A();
-        //     var result = a.CreateUser("InvalidUser123", "1234");
+        [Test]
+        public void ShouldReturnFailureMessageWhenInvalidUserName()
+        {
+            var userValidator = new UserValidator();
+            var result = userValidator.CreateUser("InvalidUser123", "1234");
 
-        //     Assert.That(result, Is.EqualTo("Account Creation Failed"));
+            Assert.That(result, Is.EqualTo("Account Creation Failed"));
 
-        // }
+        }
 
+        [Test]
+        public void ShouldReturnFailureMessageWhenInvalidPassword()
+        {
+            var userValidator = new UserValidator();
+            var result = userValidator.CreateUser("ValidUser", "Abc123");
+
+            Assert.That(result, Is.EqualTo("Account Creation Failed"));
+
+        }
     }
 }
